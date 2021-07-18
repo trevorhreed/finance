@@ -4,6 +4,7 @@
   --back-panel: #444;
 
   --fore: #bbb;
+  --hint: #888;
 
   --line: #777;
 
@@ -31,6 +32,7 @@
     --back-panel: #eee;
 
     --fore: #000;
+    --hint: #888;
 
     --line: #777;
 
@@ -102,6 +104,7 @@ label{
   margin: 12px 0;
   p{
     margin: 1em 0 .5em;
+    color: var(--hint);
   }
 }
 input{
@@ -125,6 +128,7 @@ button {
 body{
   font-family: Helvetica, Arial, sans-serif;
   font-size: var(--fontSize);
+  line-height: 1.7em;
   display: flex;
   flex-direction: column;
   max-width: 1024px;
@@ -169,7 +173,7 @@ main{
 
 main > section.disclaimer{
   p{
-    line-height: 1.7em;
+    color: var(--hint);
   }
 }
 

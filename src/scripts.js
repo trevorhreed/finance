@@ -70,11 +70,14 @@ document.addEventListener('DOMContentLoaded', async e => {
     }
 
     let updateFigures
+    const moneyRe = /[$,]/g
+    const getMoneyField = x => parseFloat((x || 0).replace(moneyRe, ''))
+    const getPercentField = x => parseFloat((x || 0).replace(/%/g, '')) / 100
     const evaluate = () => {
-      const charityRate = parseFloat(charityEl.value.replace(/%/g, ''))
-      const monthlyBudget = parseFloat(budgetEl.value)
+      const charityRate = getPercentField(charityEl.value)
+      const monthlyBudget = getMoneyField(budgetEl.value)
       const data = [income1.value, income2.value]
-        .map(x => parseFloat((x || 0).replace(/[$,]/g, '')))
+        .map(x => getMoneyField(x))
         .map(gross => {
           const tax = +getTaxAmount(gross).toFixed(2)
           const net = +(gross - tax).toFixed(2)
