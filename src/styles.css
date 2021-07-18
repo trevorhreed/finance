@@ -167,6 +167,12 @@ main{
   }
 }
 
+main > section.disclaimer{
+  p{
+    line-height: 1.7em;
+  }
+}
+
 main > section.income{
   .input{
     margin-right: 12px;
@@ -199,6 +205,11 @@ main > section.income{
   }
   .savings1,.savings2,.savingsDiff{
     color: var(--positive);
+  }
+  .note{
+    font-size: 12px;
+    font-style: italic;
+    text-align: right;
   }
 }
 

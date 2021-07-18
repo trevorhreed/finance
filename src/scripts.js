@@ -19,6 +19,7 @@ document.addEventListener('DOMContentLoaded', async e => {
     const budgetEl = sectionEl.querySelector('.budget-input')
     const periodSelEl = sectionEl.querySelector('.period')
     const resultsEl = sectionEl.querySelector('.results')
+    const noteEl = sectionEl.querySelector('.note')
 
     const getTaxAmount = income => {
       const { standardDeduction, brackets } = taxData.filingStatuses[filingStatusEl.value]
@@ -100,6 +101,7 @@ document.addEventListener('DOMContentLoaded', async e => {
       filingStatusEl.append(option)
     })
 
+    noteEl.textContent = `*Figures generating using tax data for ${taxData.taxYear}.`
     income1.addEventListener('input', evaluate)
     income2.addEventListener('input', evaluate)
     filingStatusEl.addEventListener('input', evaluate)
@@ -126,7 +128,7 @@ document.addEventListener('DOMContentLoaded', async e => {
       document.querySelector(`main .${route}`).classList.add('show')
     }
 
-    if (!location.hash) location.hash = 'intro'
+    if (!location.hash) location.hash = 'disclaimer'
     route(location.hash.slice(1))
 
     window.addEventListener('hashchange', e => {
