@@ -104,7 +104,7 @@ document.addEventListener('DOMContentLoaded', async e => {
       filingStatusEl.append(option)
     })
 
-    noteEl.textContent = `*Figures generating using tax data for ${taxData.taxYear}.`
+    noteEl.textContent = `*Figures generated using tax data for ${taxData.taxYear}.`
     income1.addEventListener('input', evaluate)
     income2.addEventListener('input', evaluate)
     filingStatusEl.addEventListener('input', evaluate)
