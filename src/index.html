@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en-US">
+  <!--
+    Add diff
+    auto evaluate (no button necessary)
+   -->
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Seek</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="scripts.js"></script>
+  </head>
+  <body>
+    <header class="tabs">
+      <a href="#intro"><h2 class="intro">Intro</h2></a>
+      <a href="#income"><h2 class="income">Income</h2></a>
+      <a href="#rois"><h2 class="vnext">vNext</h2></a>
+    </header>
+    <main>
+      <section class="intro">
+        <h1>Introduction</h1>
+        <p>Welcome!</p>
+      </section>
+      <section class="income">
+        <div class="input">
+          <label>
+            <p>Income #1</p>
+            <input class="income-input-1" value="$120,000" />
+          </label>
+          <label>
+            <p>Income #2</p>
+            <input class="income-input-2" value="$80,000" />
+          </label>
+          <label>
+            <p>Filing status:</p>
+            <select class="filing-status"></select>
+          </label>
+          <label>
+            <p>Percent of your income donated to charity:</p>
+            <input class="charity-input" value=".1" min="0" max="1" />
+          </label>
+          <label>
+            <p>Monthly budget:</p>
+            <input class="budget-input" type="number" value="2000" />
+          </label>
+        </div>
+        <div class="output">
+          <label>
+            <p>Select Period</p>
+            <select class="period">
+              <option value="1">Annual</option>
+              <option value="12">Monthly</option>
+              <option value="26">Biweekly</option>
+              <option value="52">Weekly</option>
+              <option value="2080">Hourly</option>
+            </select>
+          </label>
+          <table class="results">
+            <thead>
+              <tr>
+                <th>Income</th>
+                <th class="income1"></th>
+                <th class="income2"></th>
+                <th>Difference</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Gross</td>
+                <td class="gross1"></td>
+                <td class="gross2"></td>
+                <td class="grossDiff"></td>
+              </tr>
+              <tr>
+                <td>Tax</td>
+                <td class="tax1"></td>
+                <td class="tax2"></td>
+                <td class="taxDiff"></td>
+              </tr>
+              <tr>
+                <td>Effective Tax Rate</td>
+                <td class="rate1"></td>
+                <td class="rate2"></td>
+                <td class="rateDiff"></td>
+              </tr>
+              <tr>
+                <td>Net Income</td>
+                <td class="net1"></td>
+                <td class="net2"></td>
+                <td class="netDiff"></td>
+              </tr>
+              <tr>
+                <td>Charity</td>
+                <td class="charity1"></td>
+                <td class="charity2"></td>
+                <td class="charityDiff"></td>
+              </tr>
+              <tr>
+                <td>Budget</td>
+                <td class="budget1"></td>
+                <td class="budget2"></td>
+                <td class="budgetDiff"></td>
+              </tr>
+              <tr>
+                <td>Savings</td>
+                <td class="savings1"></td>
+                <td class="savings2"></td>
+                <td class="savingsDiff"></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+      <section class="vnext">
+        <h1>Coming soon.</h1>
+      </section>
+    </main>
+  </body>
+</html>

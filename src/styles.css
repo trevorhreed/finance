@@ -1,0 +1,208 @@
+:root{
+  --space: #555;
+  --back: #333;
+  --back-panel: #444;
+
+  --fore: #bbb;
+
+  --line: #777;
+
+  --input-border: var(--line);
+  --input-focus: #aaa;
+
+  --tab-hover: #555;
+  --tab-selected: #333;
+
+  --button-back: var(--back-panel);
+  --button-hover-back: var(--tab-hover);
+  --button-active-back: var(--tab-selected):
+  --button-fore: var(--fore);
+
+  --positive: #5f5;
+  --negative: #f55;
+
+  --fontSize: 16px;
+}
+
+@media (prefers-color-scheme: light) {
+  :root{
+    --space: #ddd;
+    --back: #fff;
+    --back-panel: #eee;
+
+    --fore: #000;
+
+    --line: #777;
+
+    --input-border: var(--line);
+    --input-focus: #222;
+
+    --tab-hover: #ddd;
+    --tab-selected: #fff;
+
+    --button-back: var(--back-panel);
+    --button-hover-back: var(--tab-hover);
+    --button-active-back: var(--tab-selected):
+    --button-fore: var(--fore);
+
+    --positive: green;
+    --negative: red;
+  }
+}
+
+html{
+  background: var(--space);
+}
+html,
+body{
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden;
+}
+
+h1,h2,h3{
+  font-weight: 100;
+}
+
+input,
+textarea,
+select,
+body{
+  background: var(--back);
+  color: var(--fore);
+}
+
+input,
+textarea,
+button,
+select{
+  border-radius: 5px;
+  padding: .8em;
+  font-size: var(--fontSize);
+}
+
+input,
+textarea,
+select{
+  transition: border-color .2s ease;
+  &:focus{
+    outline: 0;
+    border: solid 1px var(--input-focus);
+  }
+}
+
+textarea{
+  height: 3em;
+}
+
+label{
+  display: flex;
+  flex-direction: column;
+  margin: 12px 0;
+  p{
+    margin: 1em 0 .5em;
+  }
+}
+input{
+  border: solid 1px var(--input-border);
+}
+button {
+  background: var(--button-back);
+  color: var(--button-fore);
+  border: 0;
+  margin: 12px 0;
+  cursor: pointer;
+  transition: background .2s ease;
+  &:hover{
+    background: var(--button-hover-back);
+  }
+  &:active{
+    background: var(--button-active-back);
+  }
+}
+
+body{
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: var(--fontSize);
+  display: flex;
+  flex-direction: column;
+  max-width: 1024px;
+  margin: 0 auto;
+}
+
+header{
+  display: flex;
+  background: var(--back-panel);
+  a{
+    color: var(--fore);
+    text-decoration: none;
+  }
+  h2{
+    flex: 1;
+    margin: 0;
+    padding: .4em 1em;
+    text-align: center;
+    cursor: pointer;
+    transition: background .2s ease;
+    &:hover{
+      background: var(--tab-hover);
+    }
+    &.selected{
+      background: var(--tab-selected);
+    }
+  }
+}
+
+main{
+  flex: 1;
+  overflow: auto;
+
+  & > section{
+    padding: 0 24px 96px;
+    display: none;
+    &.show{
+      display: block;
+    }
+  }
+}
+
+main > section.income{
+  display: flex;
+  .input{
+    margin-right: 12px;
+  }
+  .output{
+    margin-left: 12px;
+    flex: 1;
+  }
+  .results{
+    width: 100%;
+    border-collapse: collapse;
+    th,td{
+      padding: 12px 8px;
+    }
+    th{
+      border-bottom: solid 1px var(--line);
+    }
+    th:first-child{
+      text-align: left;
+    }
+    th:not(:first-child),
+    td:not(:first-child){
+      text-align: right;
+    }
+  }
+  .tax1,.tax2,.taxDiff,
+  .charity1,.charity2,.charityDiff,
+  .budget1,.budget2,.budgetDiff{
+    color: var(--negative);
+  }
+  .savings1,.savings2,.savingsDiff{
+    color: var(--positive);
+  }
+}
+
+.hide{
+  display: none;
+}

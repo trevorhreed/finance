@@ -1,2 +1,1 @@
-# financial-calculators
-A few financial calculators
+# A Few Financial Calculators
