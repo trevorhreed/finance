@@ -162,13 +162,12 @@ main{
     padding: 0 24px 96px;
     display: none;
     &.show{
-      display: block;
+      display: flex;
     }
   }
 }
 
 main > section.income{
-  display: flex;
   .input{
     margin-right: 12px;
   }
