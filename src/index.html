@@ -1,21 +1,17 @@
 <!doctype html>
 <html lang="en-US">
-  <!--
-    Add diff
-    auto evaluate (no button necessary)
-   -->
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Yield</title>
-    <link rel="stylesheet" href="styles.css" />
+    <title>Finance</title>
+    <link rel="stylesheet" href="styles.scss" />
     <script src="scripts.js"></script>
   </head>
   <body>
     <header class="tabs">
-      <a href="#disclaimer"><h2 class="disclaimer">Disclaimer</h2></a>
       <a href="#income"><h2 class="income">Income</h2></a>
-      <a href="#vnext"><h2 class="vnext">vNext</h2></a>
+      <a href="#vnext" class="hide"><h2 class="vnext">vNext</h2></a>
+      <a href="#disclaimer"><h2 class="disclaimer">Disclaimer</h2></a>
     </header>
     <main>
       <section class="disclaimer">
@@ -153,7 +149,10 @@
                 <td class="savingsDiff"></td>
               </tr>
             </tbody>
-            <tfoot><tr><td colspan="4" class="note"></td></tr></tfoot>
+            <tfoot><tr><td colspan="4" class="footnotes">
+              <span class="note"></span>
+              <span>Please read our <a href="#disclaimer">disclaimer</a>.</span>
+            </td></tr></tfoot>
           </table>
         </div>
       </section>

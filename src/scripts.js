@@ -1,11 +1,6 @@
 document.addEventListener('DOMContentLoaded', async e => {
-  const p = fetch('./tax-data.json').then(res => res.json())
-  const [
-    taxData
-  ] = await Promise.all([
-    p
-  ])
-
+  const promise = fetch('./tax-data.json').then(res => res.json())
+  const [taxData] = await Promise.all([ promise ])
 
   {
     ///////////////////////////////////////////////////////////////
@@ -22,7 +17,8 @@ document.addEventListener('DOMContentLoaded', async e => {
     const noteEl = sectionEl.querySelector('.note')
 
     const getTaxAmount = income => {
-      const { standardDeduction, brackets } = taxData.filingStatuses[filingStatusEl.value]
+      const { standardDeduction, brackets } = taxData.active.filingStatuses[filingStatusEl.value]
+      console.dir
       let remaining = Math.max(income - standardDeduction, 0)
       let taxAmount = 0
       for (let i = 0, l = brackets.length; i < l; i++) {
@@ -97,14 +93,14 @@ document.addEventListener('DOMContentLoaded', async e => {
       updateFigures(periodSelEl.value)
     }
 
-    taxData.filingStatuses.forEach((filingStatus, i) => {
+    taxData.active.filingStatuses.forEach((filingStatus, i) => {
       const option = document.createElement('option')
       option.textContent = filingStatus.label
       option.value = i
       filingStatusEl.append(option)
     })
 
-    noteEl.textContent = `*Figures generated using tax data for ${taxData.taxYear}.`
+    noteEl.textContent = `*Figures generated using tax data for ${taxData.active.taxYear}.`
     income1.addEventListener('input', evaluate)
     income2.addEventListener('input', evaluate)
     filingStatusEl.addEventListener('input', evaluate)
@@ -131,7 +127,7 @@ document.addEventListener('DOMContentLoaded', async e => {
       document.querySelector(`main .${route}`).classList.add('show')
     }
 
-    if (!location.hash) location.hash = 'disclaimer'
+    if (!location.hash) location.hash = 'income'
     route(location.hash.slice(1))
 
     window.addEventListener('hashchange', e => {

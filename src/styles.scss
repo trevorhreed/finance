@@ -5,6 +5,7 @@
 
   --fore: #bbb;
   --hint: #888;
+  --link: #8AE;
 
   --line: #777;
 
@@ -61,6 +62,10 @@ body{
   padding: 0;
   height: 100%;
   overflow: hidden;
+}
+
+a,a:visited{
+  color: var(--link);
 }
 
 h1,h2,h3{
@@ -210,8 +215,8 @@ main > section.income{
   .savings1,.savings2,.savingsDiff{
     color: var(--positive);
   }
-  .note{
-    font-size: 12px;
+  .footnotes{
+    font-size: 11px;
     font-style: italic;
     text-align: right;
   }

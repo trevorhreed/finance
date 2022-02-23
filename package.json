@@ -1,6 +1,6 @@
 {
   "name": "financial-calculators",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "A few financial calculators",
   "main": "docs/index.html",
   "scripts": {
@@ -13,7 +13,7 @@
     "url": "git+https://github.com/trevorhreed/financial-calculators.git"
   },
   "author": "Trevor Reed",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/trevorhreed/financial-calculators/issues"
   },

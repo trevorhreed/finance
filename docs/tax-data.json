@@ -1,57 +1,115 @@
 {
-  "taxYear": 2021,
-  "filingStatuses": [
-    {
-      "label": "Single / Unmarried Individuals",
-      "standardDeduction": 12550,
-      "brackets": [
-        { "from": 0, "rate": 0.10 },
-        { "from": 9950, "rate": 0.12 },
-        { "from": 40525, "rate": 0.22 },
-        { "from": 86376, "rate": 0.24 },
-        { "from": 164926, "rate": 0.32 },
-        { "from": 209426, "rate": 0.35 },
-        { "from": 523601, "rate": 0.37 }
-      ]
-    },
-    {
-      "label": "Married Filing Jointly or Qualifying Widow/Widower",
-      "standardDeduction": 25100,
-      "brackets": [
-        { "from": 0, "rate": 0.10 },
-        { "from": 19900, "rate": 0.12 },
-        { "from": 81050, "rate": 0.22 },
-        { "from": 172750, "rate": 0.24 },
-        { "from": 329850, "rate": 0.32 },
-        { "from": 418851, "rate": 0.35 },
-        { "from": 628300, "rate": 0.37 }
-      ]
-    },
-    {
-      "label": "Married Filing Separately",
-      "standardDeduction": 12550,
-      "brackets": [
-        { "from": 0, "rate": 0.10 },
-        { "from": 9950, "rate": 0.12 },
-        { "from": 40525, "rate": 0.22 },
-        { "from": 86375, "rate": 0.24 },
-        { "from": 164925, "rate": 0.32 },
-        { "from": 209425, "rate": 0.35 },
-        { "from": 314150, "rate": 0.37 }
-      ]
-    },
-    {
-      "label": "Head of Household",
-      "standardDeduction": 18800,
-      "brackets": [
-        { "from": 0, "rate": 0.10 },
-        { "from": 14200, "rate": 0.12 },
-        { "from": 54200, "rate": 0.22 },
-        { "from": 86351, "rate": 0.24 },
-        { "from": 164900, "rate": 0.32 },
-        { "from": 209400, "rate": 0.35 },
-        { "from": 523600, "rate": 0.37 }
-      ]
-    }
-  ]
+  "active": {
+    "taxYear": 2022,
+    "source": "https://www.irs.gov/newsroom/irs-provides-tax-inflation-adjustments-for-tax-year-2022",
+    "filingStatuses": [{
+        "label": "Single / Unmarried Individuals (No Dependents)",
+        "standardDeduction": 12950,
+        "brackets": [
+          { "from": 0, "rate": 0.10 },
+          { "from": 10275, "rate": 0.12 },
+          { "from": 41775, "rate": 0.22 },
+          { "from": 89075, "rate": 0.24 },
+          { "from": 170050, "rate": 0.32 },
+          { "from": 215950, "rate": 0.35 },
+          { "from": 539900, "rate": 0.37 }
+        ]
+      },
+      {
+        "label": "Married Filing Separately",
+        "standardDeduction": 12950,
+        "brackets": [
+          { "from": 0, "rate": 0.10 },
+          { "from": 10275, "rate": 0.12 },
+          { "from": 41775, "rate": 0.22 },
+          { "from": 89075, "rate": 0.24 },
+          { "from": 170050, "rate": 0.32 },
+          { "from": 215950, "rate": 0.35 },
+          { "from": 323925, "rate": 0.37 }
+        ]
+      },
+      {
+        "label": "Married Filing Jointly or Qualifying Widow/Widower",
+        "standardDeduction": 25900,
+        "brackets": [
+          { "from": 0, "rate": 0.10 },
+          { "from": 20550, "rate": 0.12 },
+          { "from": 83550, "rate": 0.22 },
+          { "from": 178150, "rate": 0.24 },
+          { "from": 340100, "rate": 0.32 },
+          { "from": 431900, "rate": 0.35 },
+          { "from": 647850, "rate": 0.37 }
+        ]
+      },
+      {
+        "label": "Head of Household (Single With Dependents)",
+        "standardDeduction": 19400,
+        "brackets": [
+          { "from": 0, "rate": 0.10 },
+          { "from": 14650, "rate": 0.12 },
+          { "from": 55900 , "rate": 0.22 },
+          { "from": 89050, "rate": 0.24 },
+          { "from": 170050, "rate": 0.32 },
+          { "from": 215950, "rate": 0.35 },
+          { "from": 539900, "rate": 0.37 }
+        ]
+      }
+    ]
+  },
+  "past": [{
+    "taxYear": 2021,
+    "filingStatuses": [{
+        "label": "Single / Unmarried Individuals",
+        "standardDeduction": 12550,
+        "brackets": [
+          { "from": 0, "rate": 0.10 },
+          { "from": 9950, "rate": 0.12 },
+          { "from": 40525, "rate": 0.22 },
+          { "from": 86376, "rate": 0.24 },
+          { "from": 164926, "rate": 0.32 },
+          { "from": 209426, "rate": 0.35 },
+          { "from": 523601, "rate": 0.37 }
+        ]
+      },
+      {
+        "label": "Married Filing Jointly or Qualifying Widow/Widower",
+        "standardDeduction": 25100,
+        "brackets": [
+          { "from": 0, "rate": 0.10 },
+          { "from": 19900, "rate": 0.12 },
+          { "from": 81050, "rate": 0.22 },
+          { "from": 172750, "rate": 0.24 },
+          { "from": 329850, "rate": 0.32 },
+          { "from": 418851, "rate": 0.35 },
+          { "from": 628300, "rate": 0.37 }
+        ]
+      },
+      {
+        "label": "Married Filing Separately",
+        "standardDeduction": 12550,
+        "brackets": [
+          { "from": 0, "rate": 0.10 },
+          { "from": 9950, "rate": 0.12 },
+          { "from": 40525, "rate": 0.22 },
+          { "from": 86375, "rate": 0.24 },
+          { "from": 164925, "rate": 0.32 },
+          { "from": 209425, "rate": 0.35 },
+          { "from": 314150, "rate": 0.37 }
+        ]
+      },
+      {
+        "label": "Head of Household",
+        "standardDeduction": 18800,
+        "brackets": [
+          { "from": 0, "rate": 0.10 },
+          { "from": 14200, "rate": 0.12 },
+          { "from": 54200, "rate": 0.22 },
+          { "from": 86351, "rate": 0.24 },
+          { "from": 164900, "rate": 0.32 },
+          { "from": 209400, "rate": 0.35 },
+          { "from": 523600, "rate": 0.37 }
+        ]
+      }
+    ]
+  }]
 }
