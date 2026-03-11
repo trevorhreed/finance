@@ -1,7 +1,7 @@
 {
   "active": {
-    "taxYear": 2022,
-    "source": "https://www.irs.gov/newsroom/irs-provides-tax-inflation-adjustments-for-tax-year-2022",
+    "taxYear": 2026,
+    "source": "https://www.irs.gov/newsroom/irs-releases-tax-inflation-adjustments-for-tax-year-2026-including-amendments-from-the-one-big-beautiful-bill",
     "filingStatuses": [{
         "label": "Single / Unmarried Individuals (No Dependents)",
         "standardDeduction": 16100,
