@@ -4,54 +4,54 @@
     "source": "https://www.irs.gov/newsroom/irs-provides-tax-inflation-adjustments-for-tax-year-2022",
     "filingStatuses": [{
         "label": "Single / Unmarried Individuals (No Dependents)",
-        "standardDeduction": 12950,
+        "standardDeduction": 16100,
         "brackets": [
           { "from": 0, "rate": 0.10 },
-          { "from": 10275, "rate": 0.12 },
-          { "from": 41775, "rate": 0.22 },
-          { "from": 89075, "rate": 0.24 },
-          { "from": 170050, "rate": 0.32 },
-          { "from": 215950, "rate": 0.35 },
-          { "from": 539900, "rate": 0.37 }
+          { "from": 12400, "rate": 0.12 },
+          { "from": 50400, "rate": 0.22 },
+          { "from": 105700, "rate": 0.24 },
+          { "from": 201775, "rate": 0.32 },
+          { "from": 256225, "rate": 0.35 },
+          { "from": 640600, "rate": 0.37 }
         ]
       },
       {
         "label": "Married Filing Separately",
-        "standardDeduction": 12950,
+        "standardDeduction": 16100,
         "brackets": [
           { "from": 0, "rate": 0.10 },
-          { "from": 10275, "rate": 0.12 },
-          { "from": 41775, "rate": 0.22 },
-          { "from": 89075, "rate": 0.24 },
-          { "from": 170050, "rate": 0.32 },
-          { "from": 215950, "rate": 0.35 },
-          { "from": 323925, "rate": 0.37 }
+          { "from": 12400, "rate": 0.12 },
+          { "from": 50400, "rate": 0.22 },
+          { "from": 105700, "rate": 0.24 },
+          { "from": 201775, "rate": 0.32 },
+          { "from": 256225, "rate": 0.35 },
+          { "from": 640600, "rate": 0.37 }
         ]
       },
       {
         "label": "Married Filing Jointly or Qualifying Widow/Widower",
-        "standardDeduction": 25900,
+        "standardDeduction": 32200,
         "brackets": [
           { "from": 0, "rate": 0.10 },
-          { "from": 20550, "rate": 0.12 },
-          { "from": 83550, "rate": 0.22 },
-          { "from": 178150, "rate": 0.24 },
-          { "from": 340100, "rate": 0.32 },
-          { "from": 431900, "rate": 0.35 },
-          { "from": 647850, "rate": 0.37 }
+          { "from": 24800, "rate": 0.12 },
+          { "from": 100800 , "rate": 0.22 },
+          { "from": 211400, "rate": 0.24 },
+          { "from": 403550, "rate": 0.32 },
+          { "from": 512450 , "rate": 0.35 },
+          { "from": 768700, "rate": 0.37 }
         ]
       },
       {
         "label": "Head of Household (Single With Dependents)",
-        "standardDeduction": 19400,
+        "standardDeduction": 24150,
         "brackets": [
           { "from": 0, "rate": 0.10 },
-          { "from": 14650, "rate": 0.12 },
-          { "from": 55900 , "rate": 0.22 },
-          { "from": 89050, "rate": 0.24 },
-          { "from": 170050, "rate": 0.32 },
-          { "from": 215950, "rate": 0.35 },
-          { "from": 539900, "rate": 0.37 }
+          { "from": 12400, "rate": 0.12 },
+          { "from": 50400, "rate": 0.22 },
+          { "from": 105700, "rate": 0.24 },
+          { "from": 201775, "rate": 0.32 },
+          { "from": 256225, "rate": 0.35 },
+          { "from": 640600, "rate": 0.37 }
         ]
       }
     ]
