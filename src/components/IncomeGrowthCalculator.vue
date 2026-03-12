@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed, onMounted, nextTick } from 'vue'
+import { Copy, ClipboardPaste } from 'lucide-vue-next'
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
 import { Label } from '@/components/ui/label'
 import { Input } from '@/components/ui/input'
@@ -51,11 +52,45 @@ function removeEntry(index: number) {
   timeline.value.splice(index, 1)
 }
 
+const copyTooltip = ref('')
+
+async function copyTimeline() {
+  const text = timeline.value
+    .map((e) => `${e.year}\t${e.income}`)
+    .join('\n')
+  await navigator.clipboard.writeText(text)
+  copyTooltip.value = 'Copied!'
+  setTimeout(() => { copyTooltip.value = '' }, 1500)
+}
+
+async function pasteTimeline() {
+  const text = await navigator.clipboard.readText()
+  const lines = text.trim().split('\n').filter((l) => l.trim())
+  if (lines.length === 0) return
+
+  const entries: PayChange[] = []
+  for (const line of lines) {
+    // Support tab or multiple spaces as delimiter (not comma — it appears in currency values)
+    const parts = line.split(/\t|\s{2,}/).map((s) => s.trim()).filter(Boolean)
+    if (parts.length >= 2) {
+      const year = parts[0]!.replace(/\D/g, '')
+      const income = parts.slice(1).join(' ')
+      if (year.length === 4) {
+        entries.push({ year, income })
+      }
+    }
+  }
+  if (entries.length > 0) {
+    timeline.value = entries
+    await nextTick()
+  }
+}
+
 // Parse timeline into sorted entries with numeric values
 const parsedTimeline = computed(() => {
   return timeline.value
     .map((e) => ({ year: +e.year, income: parseMoney(e.income) }))
-    .filter((e) => e.year >= minCpiYear.value && e.year <= maxCpiYear.value && e.income > 0)
+    .filter((e) => e.year >= minCpiYear.value && e.income > 0)
     .sort((a, b) => a.year - b.year)
 })
 
@@ -86,7 +121,7 @@ const projections = computed<YearData[]>(() => {
 
   const cpi = cpiData.value
   const firstYear = entries[0]!.year
-  const lastYear = Math.min(entries[entries.length - 1]!.year, maxCpiYear.value)
+  const lastYear = entries[entries.length - 1]!.year
 
   // Build a map of year -> income (carry forward between changes)
   const incomeByYear: Record<number, number> = {}
@@ -102,21 +137,42 @@ const projections = computed<YearData[]>(() => {
     incomeByYear[y] = currentIncome
   }
 
+  // For years beyond CPI data, extrapolate using average recent inflation
+  const lastCpiYear = maxCpiYear.value
+  const lastCpiValue = cpi[String(lastCpiYear)]
+  let avgRecentInflation = 0.03 // fallback
+  if (lastCpiValue) {
+    const lookback = 3
+    const olderCpi = cpi[String(lastCpiYear - lookback)]
+    if (olderCpi) {
+      avgRecentInflation = Math.pow(lastCpiValue / olderCpi, 1 / lookback) - 1
+    }
+  }
+
+  function getCpi(year: number): number | null {
+    const val = cpi[String(year)]
+    if (val) return val
+    if (lastCpiValue && year > lastCpiYear) {
+      return lastCpiValue * Math.pow(1 + avgRecentInflation, year - lastCpiYear)
+    }
+    return null
+  }
+
   // Pick base CPI for real-dollar conversion
   const refYear = baseYear.value === '1' ? lastYear : firstYear
-  const baseCpi = cpi[String(refYear)]
+  const baseCpi = getCpi(refYear)
   if (!baseCpi) return []
 
   const results: YearData[] = []
 
   for (let y = firstYear; y <= lastYear; y++) {
     const nominal = incomeByYear[y]!
-    const yearCpi = cpi[String(y)]
+    const yearCpi = getCpi(y)
     if (!yearCpi) continue
 
     const real = nominal * (baseCpi / yearCpi)
     const inflation = y === firstYear ? null : (() => {
-      const prevCpi = cpi[String(y - 1)]
+      const prevCpi = getCpi(y - 1)
       return prevCpi ? (yearCpi - prevCpi) / prevCpi : null
     })()
 
@@ -196,12 +252,35 @@ function formatPct(val: number | null): string {
                 &times;
               </button>
             </div>
-            <button
-              class="text-xs text-muted-foreground hover:text-foreground transition-colors"
-              @click="addEntry"
-            >
-              + Add Pay Change
-            </button>
+            <div class="flex items-center gap-3">
+              <button
+                class="text-xs text-muted-foreground hover:text-foreground transition-colors"
+                @click="addEntry"
+              >
+                + Add Pay Change
+              </button>
+              <span class="flex-1" />
+              <button
+                class="text-muted-foreground hover:text-foreground transition-colors relative"
+                title="Copy timeline"
+                @click="copyTimeline"
+              >
+                <Copy class="h-3.5 w-3.5" />
+                <span
+                  v-if="copyTooltip"
+                  class="absolute -top-7 left-1/2 -translate-x-1/2 text-xs bg-foreground text-background px-2 py-0.5 rounded whitespace-nowrap"
+                >
+                  {{ copyTooltip }}
+                </span>
+              </button>
+              <button
+                class="text-muted-foreground hover:text-foreground transition-colors"
+                title="Paste timeline"
+                @click="pasteTimeline"
+              >
+                <ClipboardPaste class="h-3.5 w-3.5" />
+              </button>
+            </div>
           </CardContent>
         </Card>
 
@@ -223,7 +302,7 @@ function formatPct(val: number | null): string {
               </Select>
             </div>
             <p class="text-xs text-muted-foreground">
-              Inflation data: CPI-U annual averages ({{ minCpiYear }}–{{ maxCpiYear }}) from the Bureau of Labor Statistics.
+              Inflation data: CPI-U annual averages ({{ minCpiYear }}–{{ maxCpiYear }}) from the Bureau of Labor Statistics. Years beyond {{ maxCpiYear }} use estimated inflation based on recent trends.
             </p>
           </CardContent>
         </Card>
