@@ -30,7 +30,7 @@ const timeline = ref<PayChange[]>([
 ])
 
 onMounted(async () => {
-  const res = await fetch('/cpi-data.json')
+  const res = await fetch(import.meta.env.BASE_URL + 'cpi-data.json')
   const json = await res.json()
   cpiData.value = json.data
 })

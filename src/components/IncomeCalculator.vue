@@ -26,7 +26,7 @@ const budgetInput = ref('$2,000')
 const period = ref('1')
 
 onMounted(async () => {
-  const res = await fetch('/tax-data.json')
+  const res = await fetch(import.meta.env.BASE_URL + 'tax-data.json')
   taxData.value = await res.json()
 })
 
