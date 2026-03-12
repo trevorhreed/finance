@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import { TabsList, TabsTrigger } from '@/components/ui/tabs'
 import IncomeCalculator from '@/components/IncomeCalculator.vue'
 import IncomeGrowthCalculator from '@/components/IncomeGrowthCalculator.vue'
@@ -8,9 +8,16 @@ import ThemeToggle from '@/components/ThemeToggle.vue'
 import { useUrlSync } from '@/composables/useUrlSync'
 
 const activeTab = ref('income')
+const version = ref<number | null>(null)
 
 useUrlSync({
   tab: { ref: activeTab, defaultValue: 'income' },
+})
+
+onMounted(async () => {
+  const res = await fetch(import.meta.env.BASE_URL + 'version.json')
+  const data = await res.json()
+  version.value = data.version
 })
 </script>
 
@@ -18,7 +25,7 @@ useUrlSync({
   <div class="min-h-screen flex flex-col">
     <header class="border-b">
       <div class="max-w-6xl mx-auto px-4 flex items-center justify-between h-14">
-        <h1 class="text-lg font-semibold">Finance</h1>
+        <h1 class="text-lg font-semibold">Finance <span v-if="version" class="text-xs font-normal text-muted-foreground">v{{ version }}</span></h1>
         <div class="flex items-center gap-2">
           <TabsList>
             <TabsTrigger value="income" :active="activeTab === 'income'" @click="activeTab = 'income'">

@@ -5,7 +5,7 @@ on:
     branches: [release]
 
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 
@@ -18,6 +18,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
+      - name: Bump version
+        run: |
+          VERSION=$(jq '.version' public/version.json)
+          NEW_VERSION=$((VERSION + 1))
+          echo "{ \"version\": $NEW_VERSION }" > public/version.json
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add public/version.json
+          git commit -m "Bump version to v${NEW_VERSION} [skip ci]"
+          git push
 
       - uses: actions/setup-node@v4
         with:
