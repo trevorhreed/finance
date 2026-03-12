@@ -15,6 +15,7 @@ import {
 import IncomeBreakdownChart from '@/components/charts/IncomeBreakdownChart.vue'
 import TaxRateCurveChart from '@/components/charts/TaxRateCurveChart.vue'
 import ComparisonChart from '@/components/charts/ComparisonChart.vue'
+import { useUrlSync, moneyToUrl, moneyFromUrl, percentToUrl, percentFromUrl } from '@/composables/useUrlSync'
 
 const taxData = ref<TaxData | null>(null)
 const taxYearIndex = ref('0')
@@ -24,6 +25,16 @@ const filingStatusIndex = ref('0')
 const charityInput = ref('10%')
 const budgetInput = ref('$2,000')
 const period = ref('1')
+
+useUrlSync({
+  income1: { ref: income1, defaultValue: '$120,000', toUrl: moneyToUrl, fromUrl: moneyFromUrl },
+  income2: { ref: income2, defaultValue: '$80,000', toUrl: moneyToUrl, fromUrl: moneyFromUrl },
+  taxYear: { ref: taxYearIndex, defaultValue: '0' },
+  filing: { ref: filingStatusIndex, defaultValue: '0' },
+  charity: { ref: charityInput, defaultValue: '10%', toUrl: percentToUrl, fromUrl: percentFromUrl },
+  budget: { ref: budgetInput, defaultValue: '$2,000', toUrl: moneyToUrl, fromUrl: moneyFromUrl },
+  period: { ref: period, defaultValue: '1' },
+})
 
 onMounted(async () => {
   const res = await fetch(import.meta.env.BASE_URL + 'tax-data.json')

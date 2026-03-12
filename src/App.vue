@@ -5,8 +5,13 @@ import IncomeCalculator from '@/components/IncomeCalculator.vue'
 import IncomeGrowthCalculator from '@/components/IncomeGrowthCalculator.vue'
 import DisclaimerPage from '@/components/DisclaimerPage.vue'
 import ThemeToggle from '@/components/ThemeToggle.vue'
+import { useUrlSync } from '@/composables/useUrlSync'
 
 const activeTab = ref('income')
+
+useUrlSync({
+  tab: { ref: activeTab, defaultValue: 'income' },
+})
 </script>
 
 <template>

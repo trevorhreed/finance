@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed, onMounted, nextTick } from 'vue'
+import { ref, computed, onMounted, nextTick, watch } from 'vue'
 import { Copy, ClipboardPaste } from 'lucide-vue-next'
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
 import { Label } from '@/components/ui/label'
@@ -11,6 +11,7 @@ import {
 } from '@/components/ui/table'
 import { formatCurrency } from '@/lib/tax'
 import IncomeGrowthChart from '@/components/charts/IncomeGrowthChart.vue'
+import { useUrlSync, moneyToUrl, moneyFromUrl } from '@/composables/useUrlSync'
 
 interface PayChange {
   year: string
@@ -22,13 +23,48 @@ const cpiYears = computed(() => Object.keys(cpiData.value).map(Number).sort((a, 
 const minCpiYear = computed(() => cpiYears.value[0] ?? 2000)
 const maxCpiYear = computed(() => cpiYears.value[cpiYears.value.length - 1] ?? 2025)
 
-const baseYear = ref('0')
-const timeline = ref<PayChange[]>([
+const defaultTimeline: PayChange[] = [
   { year: '2018', income: '$65,000' },
   { year: '2020', income: '$75,000' },
   { year: '2022', income: '$85,000' },
   { year: '2024', income: '$95,000' },
-])
+]
+
+const baseYear = ref('0')
+
+// Read timeline from URL or use defaults
+function parseTimelineParam(): PayChange[] | null {
+  const raw = new URLSearchParams(window.location.search).get('timeline')
+  if (!raw) return null
+  const entries = raw.split(',').map((s) => {
+    const [year, income] = s.split(':')
+    if (!year || !income) return null
+    return { year, income: moneyFromUrl(income) }
+  }).filter((e): e is PayChange => e !== null)
+  return entries.length > 0 ? entries : null
+}
+
+const timeline = ref<PayChange[]>(parseTimelineParam() ?? defaultTimeline.map((e) => ({ ...e })))
+
+useUrlSync({
+  baseYear: { ref: baseYear, defaultValue: '0' },
+})
+
+// Sync timeline to URL
+const defaultTimelineEncoded = '2018:65000,2020:75000,2022:85000,2024:95000'
+
+watch(timeline, () => {
+  const url = new URL(window.location.href)
+  const encoded = timeline.value
+    .map((e) => `${e.year}:${moneyToUrl(e.income)}`)
+    .join(',')
+  if (encoded === defaultTimelineEncoded) {
+    url.searchParams.delete('timeline')
+  } else {
+    url.searchParams.set('timeline', encoded)
+  }
+  history.replaceState(null, '', url)
+}, { deep: true })
 
 onMounted(async () => {
   const res = await fetch(import.meta.env.BASE_URL + 'cpi-data.json')
