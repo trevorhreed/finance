@@ -1,32 +1,31 @@
 {
-  "name": "financial-calculators",
-  "version": "0.2.0",
-  "description": "A few financial calculators",
-  "main": "docs/index.html",
+  "name": "finance",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
   "scripts": {
-    "start": "npm run watch & npx live-server docs",
-    "build": "htmlc ./src/index.html ./docs/index.html",
-    "watch": "htmlc ./src/index.html ./docs/index.html watch"
+    "dev": "vite",
+    "build": "vue-tsc -b && vite build",
+    "preview": "vite preview"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/trevorhreed/financial-calculators.git"
+  "dependencies": {
+    "chart.js": "^4.5.1",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "lucide-vue-next": "^0.511.0",
+    "radix-vue": "^1.9.17",
+    "tailwind-merge": "^3.3.0",
+    "vue": "^3.5.25",
+    "vue-chartjs": "^5.3.3"
   },
-  "author": "Trevor Reed",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/trevorhreed/financial-calculators/issues"
-  },
-  "homepage": "https://github.com/trevorhreed/financial-calculators#readme",
   "devDependencies": {
-    "htmlc": "file:build",
-    "chokidar": "^3.5.2",
-    "cssnano": "^5.0.6",
-    "html-minifier": "^3.5.21",
-    "jsdom": "^16.6.0",
-    "mkdirp": "^1.0.4",
-    "postcss": "^8.3.5",
-    "postcss-nested": "^5.0.5",
-    "terser": "^5.7.1"
+    "@tailwindcss/vite": "^4.2.1",
+    "@types/node": "^24.10.1",
+    "@vitejs/plugin-vue": "^6.0.2",
+    "@vue/tsconfig": "^0.8.1",
+    "tailwindcss": "^4.2.1",
+    "typescript": "~5.9.3",
+    "vite": "^7.3.1",
+    "vue-tsc": "^3.1.5"
   }
 }

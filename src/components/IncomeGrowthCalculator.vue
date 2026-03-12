@@ -1,0 +1,313 @@
+<script setup lang="ts">
+import { ref, computed, onMounted } from 'vue'
+import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
+import { Label } from '@/components/ui/label'
+import { Input } from '@/components/ui/input'
+import { Select } from '@/components/ui/select'
+import {
+  Table, TableHeader, TableBody,
+  TableRow, TableHead, TableCell,
+} from '@/components/ui/table'
+import { formatCurrency } from '@/lib/tax'
+import IncomeGrowthChart from '@/components/charts/IncomeGrowthChart.vue'
+
+interface PayChange {
+  year: string
+  income: string
+}
+
+const cpiData = ref<Record<string, number>>({})
+const cpiYears = computed(() => Object.keys(cpiData.value).map(Number).sort((a, b) => a - b))
+const minCpiYear = computed(() => cpiYears.value[0] ?? 2000)
+const maxCpiYear = computed(() => cpiYears.value[cpiYears.value.length - 1] ?? 2025)
+
+const baseYear = ref('0')
+const timeline = ref<PayChange[]>([
+  { year: '2018', income: '$65,000' },
+  { year: '2020', income: '$75,000' },
+  { year: '2022', income: '$85,000' },
+  { year: '2024', income: '$95,000' },
+])
+
+onMounted(async () => {
+  const res = await fetch('/cpi-data.json')
+  const json = await res.json()
+  cpiData.value = json.data
+})
+
+const moneyRe = /[$,]/g
+const parseMoney = (val: string) => parseFloat((val || '0').replace(moneyRe, '')) || 0
+
+function addEntry() {
+  const lastEntry = timeline.value[timeline.value.length - 1]
+  const nextYear = lastEntry ? Math.min(+lastEntry.year + 2, maxCpiYear.value) : new Date().getFullYear()
+  timeline.value.push({
+    year: String(nextYear),
+    income: lastEntry?.income ?? '$0',
+  })
+}
+
+function removeEntry(index: number) {
+  timeline.value.splice(index, 1)
+}
+
+// Parse timeline into sorted entries with numeric values
+const parsedTimeline = computed(() => {
+  return timeline.value
+    .map((e) => ({ year: +e.year, income: parseMoney(e.income) }))
+    .filter((e) => e.year >= minCpiYear.value && e.year <= maxCpiYear.value && e.income > 0)
+    .sort((a, b) => a.year - b.year)
+})
+
+// Expand timeline entries into year-by-year data
+// Income stays flat between pay changes
+interface YearData {
+  year: number
+  nominal: number
+  real: number
+  inflation: number | null
+  nominalGrowth: number | null
+  realGrowth: number | null
+  isPayChange: boolean
+}
+
+const baseYearOptions = computed(() => {
+  const entries = parsedTimeline.value
+  if (entries.length === 0) return []
+  return [
+    { label: 'First year (start)', value: '0' },
+    { label: 'Last year (today\'s $)', value: '1' },
+  ]
+})
+
+const projections = computed<YearData[]>(() => {
+  const entries = parsedTimeline.value
+  if (entries.length === 0) return []
+
+  const cpi = cpiData.value
+  const firstYear = entries[0]!.year
+  const lastYear = Math.min(entries[entries.length - 1]!.year, maxCpiYear.value)
+
+  // Build a map of year -> income (carry forward between changes)
+  const incomeByYear: Record<number, number> = {}
+  const payChangeYears = new Set<number>()
+  let currentIncome = entries[0]!.income
+
+  for (let y = firstYear; y <= lastYear; y++) {
+    const entry = entries.find((e) => e.year === y)
+    if (entry) {
+      currentIncome = entry.income
+      payChangeYears.add(y)
+    }
+    incomeByYear[y] = currentIncome
+  }
+
+  // Pick base CPI for real-dollar conversion
+  const refYear = baseYear.value === '1' ? lastYear : firstYear
+  const baseCpi = cpi[String(refYear)]
+  if (!baseCpi) return []
+
+  const results: YearData[] = []
+
+  for (let y = firstYear; y <= lastYear; y++) {
+    const nominal = incomeByYear[y]!
+    const yearCpi = cpi[String(y)]
+    if (!yearCpi) continue
+
+    const real = nominal * (baseCpi / yearCpi)
+    const inflation = y === firstYear ? null : (() => {
+      const prevCpi = cpi[String(y - 1)]
+      return prevCpi ? (yearCpi - prevCpi) / prevCpi : null
+    })()
+
+    const prev = results.length > 0 ? results[results.length - 1]! : null
+
+    results.push({
+      year: y,
+      nominal,
+      real,
+      inflation,
+      nominalGrowth: prev ? (nominal - prev.nominal) / prev.nominal : null,
+      realGrowth: prev ? (real - prev.real) / prev.real : null,
+      isPayChange: payChangeYears.has(y),
+    })
+  }
+
+  return results
+})
+
+const summary = computed(() => {
+  if (projections.value.length < 2) return null
+  const first = projections.value[0]!
+  const last = projections.value[projections.value.length - 1]!
+  const years = last.year - first.year
+
+  const nominalChange = last.nominal - first.nominal
+  const nominalTotal = ((last.nominal / first.nominal) - 1) * 100
+  const realChange = last.real - first.real
+  const realTotal = ((last.real / first.real) - 1) * 100
+
+  // Cumulative inflation over the period
+  const firstCpi = cpiData.value[String(first.year)]
+  const lastCpi = cpiData.value[String(last.year)]
+  const cumulativeInflation = (firstCpi && lastCpi) ? ((lastCpi / firstCpi) - 1) * 100 : 0
+
+  return {
+    nominalChange,
+    nominalTotal,
+    realChange,
+    realTotal,
+    cumulativeInflation,
+    years,
+  }
+})
+
+function formatPct(val: number | null): string {
+  if (val === null) return '—'
+  return (val >= 0 ? '+' : '') + (val * 100).toFixed(1) + '%'
+}
+</script>
+
+<template>
+  <div class="space-y-6">
+    <div class="flex flex-col lg:flex-row gap-6">
+      <!-- Input Panel -->
+      <div class="lg:w-80 shrink-0 space-y-4">
+        <Card>
+          <CardHeader class="pb-3">
+            <CardTitle class="text-base text-muted-foreground">Pay Timeline</CardTitle>
+          </CardHeader>
+          <CardContent class="space-y-3">
+            <p class="text-xs text-muted-foreground">
+              Enter your annual income at each point it changed. Income carries forward between entries.
+            </p>
+            <div
+              v-for="(entry, i) in timeline"
+              :key="i"
+              class="flex gap-2 items-center"
+            >
+              <Input v-model="entry.year" class="w-20 shrink-0" />
+              <Input v-model="entry.income" class="flex-1" />
+              <button
+                v-if="timeline.length > 1"
+                class="text-muted-foreground hover:text-foreground transition-colors text-lg leading-none px-1"
+                @click="removeEntry(i)"
+              >
+                &times;
+              </button>
+            </div>
+            <button
+              class="text-xs text-muted-foreground hover:text-foreground transition-colors"
+              @click="addEntry"
+            >
+              + Add Pay Change
+            </button>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader class="pb-3">
+            <CardTitle class="text-base text-muted-foreground">Settings</CardTitle>
+          </CardHeader>
+          <CardContent class="space-y-4">
+            <div class="space-y-2">
+              <Label>Real Dollars Basis</Label>
+              <Select v-model="baseYear">
+                <option
+                  v-for="opt in baseYearOptions"
+                  :key="opt.value"
+                  :value="opt.value"
+                >
+                  {{ opt.label }}
+                </option>
+              </Select>
+            </div>
+            <p class="text-xs text-muted-foreground">
+              Inflation data: CPI-U annual averages ({{ minCpiYear }}–{{ maxCpiYear }}) from the Bureau of Labor Statistics.
+            </p>
+          </CardContent>
+        </Card>
+      </div>
+
+      <!-- Results Panel -->
+      <Card class="flex-1 min-w-0">
+        <CardHeader>
+          <CardTitle>Nominal vs Real Income</CardTitle>
+        </CardHeader>
+        <CardContent class="space-y-6">
+          <div class="rounded-lg bg-muted/50 p-4 text-sm text-muted-foreground space-y-2">
+            <p>
+              <strong class="text-foreground">Nominal income</strong> is the actual dollar amount you're paid.
+              <strong class="text-foreground">Real income</strong> adjusts for inflation — it shows what
+              your paycheck is actually worth in terms of purchasing power.
+            </p>
+            <p>
+              For example, if you got a 3% raise but prices went up 4%, your nominal income grew
+              but your real income shrank — you can buy less than before. The gap between the two
+              lines below shows how much purchasing power you've gained or lost over time.
+            </p>
+          </div>
+
+          <!-- Summary Cards -->
+          <div v-if="summary" class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div class="rounded-lg border p-3">
+              <p class="text-xs text-muted-foreground">Nominal Growth</p>
+              <p class="text-lg font-semibold">{{ summary.nominalTotal.toFixed(1) }}%</p>
+              <p class="text-xs text-muted-foreground">{{ formatCurrency(summary.nominalChange) }} over {{ summary.years }}yr</p>
+            </div>
+            <div class="rounded-lg border p-3">
+              <p class="text-xs text-muted-foreground">Real Growth</p>
+              <p class="text-lg font-semibold" :class="summary.realTotal >= 0 ? 'text-[hsl(var(--positive))]' : 'text-[hsl(var(--negative))]'">
+                {{ summary.realTotal.toFixed(1) }}%
+              </p>
+              <p class="text-xs text-muted-foreground">{{ formatCurrency(summary.realChange) }} in real terms</p>
+            </div>
+            <div class="rounded-lg border p-3">
+              <p class="text-xs text-muted-foreground">Cumulative Inflation</p>
+              <p class="text-lg font-semibold text-[hsl(var(--negative))]">
+                {{ summary.cumulativeInflation.toFixed(1) }}%
+              </p>
+              <p class="text-xs text-muted-foreground">CPI-U over {{ summary.years }}yr</p>
+            </div>
+          </div>
+
+          <!-- Chart -->
+          <IncomeGrowthChart v-if="projections.length > 1" :data="projections" />
+
+          <!-- Table -->
+          <div class="max-h-96 overflow-auto">
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHead>Year</TableHead>
+                  <TableHead class="text-right">Nominal</TableHead>
+                  <TableHead class="text-right">Real</TableHead>
+                  <TableHead class="text-right">Inflation</TableHead>
+                  <TableHead class="text-right">Real YoY</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                <TableRow v-for="row in projections" :key="row.year">
+                  <TableCell class="font-medium">
+                    {{ row.year }}
+                    <span v-if="row.isPayChange" class="text-xs text-muted-foreground ml-1">*</span>
+                  </TableCell>
+                  <TableCell class="text-right">{{ formatCurrency(row.nominal) }}</TableCell>
+                  <TableCell class="text-right">{{ formatCurrency(row.real) }}</TableCell>
+                  <TableCell class="text-right">{{ formatPct(row.inflation) }}</TableCell>
+                  <TableCell
+                    class="text-right"
+                    :class="row.realGrowth !== null ? (row.realGrowth >= 0 ? 'text-[hsl(var(--positive))]' : 'text-[hsl(var(--negative))]') : ''"
+                  >
+                    {{ formatPct(row.realGrowth) }}
+                  </TableCell>
+                </TableRow>
+              </TableBody>
+            </Table>
+          </div>
+          <p class="text-xs text-muted-foreground italic">* indicates a pay change</p>
+        </CardContent>
+      </Card>
+    </div>
+  </div>
+</template>

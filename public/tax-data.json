@@ -1,0 +1,515 @@
+[
+  {
+    "taxYear": 2026,
+    "filingStatuses": [
+      {
+        "label": "Single",
+        "standardDeduction": 16100,
+        "brackets": [
+          { "from": 0, "rate": 0.10 },
+          { "from": 12400, "rate": 0.12 },
+          { "from": 50400, "rate": 0.22 },
+          { "from": 105700, "rate": 0.24 },
+          { "from": 201775, "rate": 0.32 },
+          { "from": 256225, "rate": 0.35 },
+          { "from": 640600, "rate": 0.37 }
+        ]
+      },
+      {
+        "label": "Married Filing Separately",
+        "standardDeduction": 16100,
+        "brackets": [
+          { "from": 0, "rate": 0.10 },
+          { "from": 12400, "rate": 0.12 },
+          { "from": 50400, "rate": 0.22 },
+          { "from": 105700, "rate": 0.24 },
+          { "from": 201775, "rate": 0.32 },
+          { "from": 256225, "rate": 0.35 },
+          { "from": 384350, "rate": 0.37 }
+        ]
+      },
+      {
+        "label": "Married Filing Jointly",
+        "standardDeduction": 32200,
+        "brackets": [
+          { "from": 0, "rate": 0.10 },
+          { "from": 24800, "rate": 0.12 },
+          { "from": 100800, "rate": 0.22 },
+          { "from": 211400, "rate": 0.24 },
+          { "from": 403550, "rate": 0.32 },
+          { "from": 512450, "rate": 0.35 },
+          { "from": 768700, "rate": 0.37 }
+        ]
+      },
+      {
+        "label": "Head of Household",
+        "standardDeduction": 24150,
+        "brackets": [
+          { "from": 0, "rate": 0.10 },
+          { "from": 17700, "rate": 0.12 },
+          { "from": 67450, "rate": 0.22 },
+          { "from": 105700, "rate": 0.24 },
+          { "from": 201750, "rate": 0.32 },
+          { "from": 256200, "rate": 0.35 },
+          { "from": 640600, "rate": 0.37 }
+        ]
+      }
+    ]
+  },
+  {
+    "taxYear": 2025,
+    "filingStatuses": [
+      {
+        "label": "Single",
+        "standardDeduction": 15000,
+        "brackets": [
+          { "from": 0, "rate": 0.10 },
+          { "from": 11925, "rate": 0.12 },
+          { "from": 48475, "rate": 0.22 },
+          { "from": 103350, "rate": 0.24 },
+          { "from": 197300, "rate": 0.32 },
+          { "from": 250525, "rate": 0.35 },
+          { "from": 626350, "rate": 0.37 }
+        ]
+      },
+      {
+        "label": "Married Filing Separately",
+        "standardDeduction": 15000,
+        "brackets": [
+          { "from": 0, "rate": 0.10 },
+          { "from": 11925, "rate": 0.12 },
+          { "from": 48475, "rate": 0.22 },
+          { "from": 103350, "rate": 0.24 },
+          { "from": 197300, "rate": 0.32 },
+          { "from": 250525, "rate": 0.35 },
+          { "from": 375800, "rate": 0.37 }
+        ]
+      },
+      {
+        "label": "Married Filing Jointly",
+        "standardDeduction": 30000,
+        "brackets": [
+          { "from": 0, "rate": 0.10 },
+          { "from": 23850, "rate": 0.12 },
+          { "from": 96950, "rate": 0.22 },
+          { "from": 206700, "rate": 0.24 },
+          { "from": 394600, "rate": 0.32 },
+          { "from": 501050, "rate": 0.35 },
+          { "from": 751600, "rate": 0.37 }
+        ]
+      },
+      {
+        "label": "Head of Household",
+        "standardDeduction": 22500,
+        "brackets": [
+          { "from": 0, "rate": 0.10 },
+          { "from": 17000, "rate": 0.12 },
+          { "from": 64850, "rate": 0.22 },
+          { "from": 103350, "rate": 0.24 },
+          { "from": 197300, "rate": 0.32 },
+          { "from": 250500, "rate": 0.35 },
+          { "from": 626350, "rate": 0.37 }
+        ]
+      }
+    ]
+  },
+  {
+    "taxYear": 2024,
+    "filingStatuses": [
+      {
+        "label": "Single",
+        "standardDeduction": 14600,
+        "brackets": [
+          { "from": 0, "rate": 0.10 },
+          { "from": 11600, "rate": 0.12 },
+          { "from": 47150, "rate": 0.22 },
+          { "from": 100525, "rate": 0.24 },
+          { "from": 191950, "rate": 0.32 },
+          { "from": 243725, "rate": 0.35 },
+          { "from": 609350, "rate": 0.37 }
+        ]
+      },
+      {
+        "label": "Married Filing Separately",
+        "standardDeduction": 14600,
+        "brackets": [
+          { "from": 0, "rate": 0.10 },
+          { "from": 11600, "rate": 0.12 },
+          { "from": 47150, "rate": 0.22 },
+          { "from": 100525, "rate": 0.24 },
+          { "from": 191950, "rate": 0.32 },
+          { "from": 243725, "rate": 0.35 },
+          { "from": 365600, "rate": 0.37 }
+        ]
+      },
+      {
+        "label": "Married Filing Jointly",
+        "standardDeduction": 29200,
+        "brackets": [
+          { "from": 0, "rate": 0.10 },
+          { "from": 23200, "rate": 0.12 },
+          { "from": 94300, "rate": 0.22 },
+          { "from": 201050, "rate": 0.24 },
+          { "from": 383900, "rate": 0.32 },
+          { "from": 487450, "rate": 0.35 },
+          { "from": 731200, "rate": 0.37 }
+        ]
+      },
+      {
+        "label": "Head of Household",
+        "standardDeduction": 21900,
+        "brackets": [
+          { "from": 0, "rate": 0.10 },
+          { "from": 16550, "rate": 0.12 },
+          { "from": 63100, "rate": 0.22 },
+          { "from": 100500, "rate": 0.24 },
+          { "from": 191950, "rate": 0.32 },
+          { "from": 243700, "rate": 0.35 },
+          { "from": 609350, "rate": 0.37 }
+        ]
+      }
+    ]
+  },
+  {
+    "taxYear": 2023,
+    "filingStatuses": [
+      {
+        "label": "Single",
+        "standardDeduction": 13850,
+        "brackets": [
+          { "from": 0, "rate": 0.10 },
+          { "from": 11000, "rate": 0.12 },
+          { "from": 44725, "rate": 0.22 },
+          { "from": 95375, "rate": 0.24 },
+          { "from": 182100, "rate": 0.32 },
+          { "from": 231250, "rate": 0.35 },
+          { "from": 578125, "rate": 0.37 }
+        ]
+      },
+      {
+        "label": "Married Filing Separately",
+        "standardDeduction": 13850,
+        "brackets": [
+          { "from": 0, "rate": 0.10 },
+          { "from": 11000, "rate": 0.12 },
+          { "from": 44725, "rate": 0.22 },
+          { "from": 95375, "rate": 0.24 },
+          { "from": 182100, "rate": 0.32 },
+          { "from": 231250, "rate": 0.35 },
+          { "from": 346875, "rate": 0.37 }
+        ]
+      },
+      {
+        "label": "Married Filing Jointly",
+        "standardDeduction": 27700,
+        "brackets": [
+          { "from": 0, "rate": 0.10 },
+          { "from": 22000, "rate": 0.12 },
+          { "from": 89450, "rate": 0.22 },
+          { "from": 190750, "rate": 0.24 },
+          { "from": 364200, "rate": 0.32 },
+          { "from": 462500, "rate": 0.35 },
+          { "from": 693750, "rate": 0.37 }
+        ]
+      },
+      {
+        "label": "Head of Household",
+        "standardDeduction": 20800,
+        "brackets": [
+          { "from": 0, "rate": 0.10 },
+          { "from": 15700, "rate": 0.12 },
+          { "from": 59850, "rate": 0.22 },
+          { "from": 95350, "rate": 0.24 },
+          { "from": 182100, "rate": 0.32 },
+          { "from": 231250, "rate": 0.35 },
+          { "from": 578100, "rate": 0.37 }
+        ]
+      }
+    ]
+  },
+  {
+    "taxYear": 2022,
+    "filingStatuses": [
+      {
+        "label": "Single",
+        "standardDeduction": 12950,
+        "brackets": [
+          { "from": 0, "rate": 0.10 },
+          { "from": 10275, "rate": 0.12 },
+          { "from": 41775, "rate": 0.22 },
+          { "from": 89075, "rate": 0.24 },
+          { "from": 170050, "rate": 0.32 },
+          { "from": 215950, "rate": 0.35 },
+          { "from": 539900, "rate": 0.37 }
+        ]
+      },
+      {
+        "label": "Married Filing Separately",
+        "standardDeduction": 12950,
+        "brackets": [
+          { "from": 0, "rate": 0.10 },
+          { "from": 10275, "rate": 0.12 },
+          { "from": 41775, "rate": 0.22 },
+          { "from": 89075, "rate": 0.24 },
+          { "from": 170050, "rate": 0.32 },
+          { "from": 215950, "rate": 0.35 },
+          { "from": 323925, "rate": 0.37 }
+        ]
+      },
+      {
+        "label": "Married Filing Jointly",
+        "standardDeduction": 25900,
+        "brackets": [
+          { "from": 0, "rate": 0.10 },
+          { "from": 20550, "rate": 0.12 },
+          { "from": 83550, "rate": 0.22 },
+          { "from": 178150, "rate": 0.24 },
+          { "from": 340100, "rate": 0.32 },
+          { "from": 431900, "rate": 0.35 },
+          { "from": 647850, "rate": 0.37 }
+        ]
+      },
+      {
+        "label": "Head of Household",
+        "standardDeduction": 19400,
+        "brackets": [
+          { "from": 0, "rate": 0.10 },
+          { "from": 14650, "rate": 0.12 },
+          { "from": 55900, "rate": 0.22 },
+          { "from": 89050, "rate": 0.24 },
+          { "from": 170050, "rate": 0.32 },
+          { "from": 215950, "rate": 0.35 },
+          { "from": 539900, "rate": 0.37 }
+        ]
+      }
+    ]
+  },
+  {
+    "taxYear": 2021,
+    "filingStatuses": [
+      {
+        "label": "Single",
+        "standardDeduction": 12550,
+        "brackets": [
+          { "from": 0, "rate": 0.10 },
+          { "from": 9950, "rate": 0.12 },
+          { "from": 40525, "rate": 0.22 },
+          { "from": 86375, "rate": 0.24 },
+          { "from": 164925, "rate": 0.32 },
+          { "from": 209425, "rate": 0.35 },
+          { "from": 523600, "rate": 0.37 }
+        ]
+      },
+      {
+        "label": "Married Filing Separately",
+        "standardDeduction": 12550,
+        "brackets": [
+          { "from": 0, "rate": 0.10 },
+          { "from": 9950, "rate": 0.12 },
+          { "from": 40525, "rate": 0.22 },
+          { "from": 86375, "rate": 0.24 },
+          { "from": 164925, "rate": 0.32 },
+          { "from": 209425, "rate": 0.35 },
+          { "from": 314150, "rate": 0.37 }
+        ]
+      },
+      {
+        "label": "Married Filing Jointly",
+        "standardDeduction": 25100,
+        "brackets": [
+          { "from": 0, "rate": 0.10 },
+          { "from": 19900, "rate": 0.12 },
+          { "from": 81050, "rate": 0.22 },
+          { "from": 172750, "rate": 0.24 },
+          { "from": 329850, "rate": 0.32 },
+          { "from": 418850, "rate": 0.35 },
+          { "from": 628300, "rate": 0.37 }
+        ]
+      },
+      {
+        "label": "Head of Household",
+        "standardDeduction": 18800,
+        "brackets": [
+          { "from": 0, "rate": 0.10 },
+          { "from": 14200, "rate": 0.12 },
+          { "from": 54200, "rate": 0.22 },
+          { "from": 86350, "rate": 0.24 },
+          { "from": 164900, "rate": 0.32 },
+          { "from": 209400, "rate": 0.35 },
+          { "from": 523600, "rate": 0.37 }
+        ]
+      }
+    ]
+  },
+  {
+    "taxYear": 2020,
+    "filingStatuses": [
+      {
+        "label": "Single",
+        "standardDeduction": 12400,
+        "brackets": [
+          { "from": 0, "rate": 0.10 },
+          { "from": 9875, "rate": 0.12 },
+          { "from": 40125, "rate": 0.22 },
+          { "from": 85525, "rate": 0.24 },
+          { "from": 163300, "rate": 0.32 },
+          { "from": 207350, "rate": 0.35 },
+          { "from": 518400, "rate": 0.37 }
+        ]
+      },
+      {
+        "label": "Married Filing Separately",
+        "standardDeduction": 12400,
+        "brackets": [
+          { "from": 0, "rate": 0.10 },
+          { "from": 9875, "rate": 0.12 },
+          { "from": 40125, "rate": 0.22 },
+          { "from": 85525, "rate": 0.24 },
+          { "from": 163300, "rate": 0.32 },
+          { "from": 207350, "rate": 0.35 },
+          { "from": 311025, "rate": 0.37 }
+        ]
+      },
+      {
+        "label": "Married Filing Jointly",
+        "standardDeduction": 24800,
+        "brackets": [
+          { "from": 0, "rate": 0.10 },
+          { "from": 19750, "rate": 0.12 },
+          { "from": 80250, "rate": 0.22 },
+          { "from": 171050, "rate": 0.24 },
+          { "from": 326600, "rate": 0.32 },
+          { "from": 414700, "rate": 0.35 },
+          { "from": 622050, "rate": 0.37 }
+        ]
+      },
+      {
+        "label": "Head of Household",
+        "standardDeduction": 18650,
+        "brackets": [
+          { "from": 0, "rate": 0.10 },
+          { "from": 14100, "rate": 0.12 },
+          { "from": 53700, "rate": 0.22 },
+          { "from": 85500, "rate": 0.24 },
+          { "from": 163300, "rate": 0.32 },
+          { "from": 207350, "rate": 0.35 },
+          { "from": 518400, "rate": 0.37 }
+        ]
+      }
+    ]
+  },
+  {
+    "taxYear": 2019,
+    "filingStatuses": [
+      {
+        "label": "Single",
+        "standardDeduction": 12200,
+        "brackets": [
+          { "from": 0, "rate": 0.10 },
+          { "from": 9700, "rate": 0.12 },
+          { "from": 39475, "rate": 0.22 },
+          { "from": 84200, "rate": 0.24 },
+          { "from": 160725, "rate": 0.32 },
+          { "from": 204100, "rate": 0.35 },
+          { "from": 510300, "rate": 0.37 }
+        ]
+      },
+      {
+        "label": "Married Filing Separately",
+        "standardDeduction": 12200,
+        "brackets": [
+          { "from": 0, "rate": 0.10 },
+          { "from": 9700, "rate": 0.12 },
+          { "from": 39475, "rate": 0.22 },
+          { "from": 84200, "rate": 0.24 },
+          { "from": 160725, "rate": 0.32 },
+          { "from": 204100, "rate": 0.35 },
+          { "from": 306175, "rate": 0.37 }
+        ]
+      },
+      {
+        "label": "Married Filing Jointly",
+        "standardDeduction": 24400,
+        "brackets": [
+          { "from": 0, "rate": 0.10 },
+          { "from": 19400, "rate": 0.12 },
+          { "from": 78950, "rate": 0.22 },
+          { "from": 168400, "rate": 0.24 },
+          { "from": 321450, "rate": 0.32 },
+          { "from": 408200, "rate": 0.35 },
+          { "from": 612350, "rate": 0.37 }
+        ]
+      },
+      {
+        "label": "Head of Household",
+        "standardDeduction": 18350,
+        "brackets": [
+          { "from": 0, "rate": 0.10 },
+          { "from": 13850, "rate": 0.12 },
+          { "from": 52850, "rate": 0.22 },
+          { "from": 84200, "rate": 0.24 },
+          { "from": 160700, "rate": 0.32 },
+          { "from": 204100, "rate": 0.35 },
+          { "from": 510300, "rate": 0.37 }
+        ]
+      }
+    ]
+  },
+  {
+    "taxYear": 2018,
+    "filingStatuses": [
+      {
+        "label": "Single",
+        "standardDeduction": 12000,
+        "brackets": [
+          { "from": 0, "rate": 0.10 },
+          { "from": 9525, "rate": 0.12 },
+          { "from": 38700, "rate": 0.22 },
+          { "from": 82500, "rate": 0.24 },
+          { "from": 157500, "rate": 0.32 },
+          { "from": 200000, "rate": 0.35 },
+          { "from": 500000, "rate": 0.37 }
+        ]
+      },
+      {
+        "label": "Married Filing Separately",
+        "standardDeduction": 12000,
+        "brackets": [
+          { "from": 0, "rate": 0.10 },
+          { "from": 9525, "rate": 0.12 },
+          { "from": 38700, "rate": 0.22 },
+          { "from": 82500, "rate": 0.24 },
+          { "from": 157500, "rate": 0.32 },
+          { "from": 200000, "rate": 0.35 },
+          { "from": 300000, "rate": 0.37 }
+        ]
+      },
+      {
+        "label": "Married Filing Jointly",
+        "standardDeduction": 24000,
+        "brackets": [
+          { "from": 0, "rate": 0.10 },
+          { "from": 19050, "rate": 0.12 },
+          { "from": 77400, "rate": 0.22 },
+          { "from": 165000, "rate": 0.24 },
+          { "from": 315000, "rate": 0.32 },
+          { "from": 400000, "rate": 0.35 },
+          { "from": 600000, "rate": 0.37 }
+        ]
+      },
+      {
+        "label": "Head of Household",
+        "standardDeduction": 18000,
+        "brackets": [
+          { "from": 0, "rate": 0.10 },
+          { "from": 13600, "rate": 0.12 },
+          { "from": 51800, "rate": 0.22 },
+          { "from": 82500, "rate": 0.24 },
+          { "from": 157500, "rate": 0.32 },
+          { "from": 200000, "rate": 0.35 },
+          { "from": 500000, "rate": 0.37 }
+        ]
+      }
+    ]
+  }
+]
